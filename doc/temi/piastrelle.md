@@ -50,6 +50,13 @@ cucina e dei due bagni.
 
 ## Una prima bozza di specificazione
 
+Una prima domanda da porsi riguarda la *mutabilità*, che non appare necessaria
+dato il problema assegnato che consiste nel descrivere alcuni rivestimenti
+essendo in grado di calcolarne il prezzo e la superficie. Per questa ragione, le
+entità in gioco verranno tutte specificate come immutabili.
+
+### Il rivestimento
+
 La prima cosa che salta all'occhio è che *superficie* e *costo* sono proprietà
 di entrambe le entità; questo suggerisce che potrebbero essere convenientemente
 raccolte in una *interfaccia* (che potremmo chiamare `Rivestimento`) questo
@@ -73,6 +80,14 @@ Rivestimento <|-- Piastrella
 Rivestimento <|-- Pavimentazione
 :::
 
+la cui interfaccia corrisponde al seguente codice
+
+:::{literalinclude} ../../src/piastrelle/Rivestimento.java
+:language: java
+:::
+
+### Le piastrelle
+
 Per quanto concerne le piastrelle, ne sono presenti di diverso tipo, distinte
 quanto meno dalla forma (ma in linea di principio potrebbero essere costituite
 di materiali diversi, o avere proprietà diverse, ad esempio dal punto di vista
@@ -84,4 +99,130 @@ propria superficie a partire dalle misure che la caratterizzano, viceversa, il
 prezzo appare come una caratteristica comune a tutte le sottoclassi. Queste
 considerazioni fanno propendere verso la realizzazione di una classe astratta il
 cui stato coincida col solo prezzo, da cui derivare le sottoclassi di diverso
-tipo.
+tipo. Il diagramma precedente diventa quindi:
+
+:::{mermaid}
+:align: center
+
+classDiagram
+class Rivestimento {
+  <<interface>>
+  superficie()
+  costo()
+}
+class Piastrella {
+  <<abstract>>
+  +costo
+}
+class PiastrellaQuadrata
+class PiastrellaTriangolare
+class PiastrellaRomboidale
+class Pavimentazione
+Rivestimento <|-- Piastrella
+Rivestimento <|-- Pavimentazione
+Piastrella <|-- PiastrellaQuadrata
+Piastrella <|-- PiastrellaTriangolare
+Piastrella <|-- PiastrellaRomboidale
+:::
+
+Un primo abbozzo di implementazione della piastrella è dato dal seguente codice
+
+:::{literalinclude} ../../src/piastrelle/Piastrella.java
+:language: java
+:::
+
+Occorre osservare che la classe è astratta in quanto il metodo `superficie`
+prescritto dall'interfaccia che implementa non è un suo metodo concreto (ragione
+per cui, tra l'altro, non c'è bisogno di aggiungerlo come metodo astratto).
+
+Inoltre, poiché l'unico attributo della classe è il `costo` che è di tipo
+primitivo, è sufficiente indicare il modificatore `final` per garantire che il
+suo valore resti immutabile; sebbene potrebbe essere esposto come `public`, per
+soddisfare l'interfaccia è necessario l'uso di un *getter*. Unica accortezza,
+dal momento che il costo deve essere positivo (unico invariante di
+rappresentazione della classe) è necessario controllarne il valore in
+costruzione.
+
+Le sottoclassi concrete sono elementari da implementare. Una bozza di codice che
+comprenda solo un costruttore e quanto necessario a soddisfare l'interfaccia
+(ereditata dalla classe astratta) è il seguente
+
+:::{literalinclude} ../../src/piastrelle/PiastrellaQuadrata.java
+:language: java
+:::
+
+:::{literalinclude} ../../src/piastrelle/PiastrellaRomboidale.java
+:language: java
+:::
+
+:::{literalinclude} ../../src/piastrelle/PiastrellaTriangolare.java
+:language: java
+:::
+
+Osserviamo che gli attributi sono rappresentabili con variabili di tipo
+primitivo, l'immutabilità è quindi garantita dall'attributo `final` ed è
+ragionevole omettere i *getter* rendendo l'attributo `public`.
+
+Come sopra, l'unica accortezza è garantire l'invariante che quantomeno richiede
+che ciascuna dimensione sia positiva; nel caso delle piastrelle romboidali è
+comodo che il costruttore accetti due valori per le diagonali (comunque
+ordinati, per facilitare l'uso del costruttore da parte degli utenti della
+classe), ma è ragionevole che la rappresentazione distingua la maggiore dalla
+minore: questo richiede che l'assegnamento dei parametri del costruttore agli
+attributi della classe sia fatto avvedutamente.
+
+### La pavimentazione
+
+La pavimentazione deve immagazzinare una collezione di rivestimenti con le
+relative quantità. Per ottenere questo risultato ci sono (almeno) tre
+possibilità:
+
+* due *vettori* (o *liste*) "paralleli", uno di rivestimenti e uno di interi
+  (della stessa dimensione), che in ciascuna coordinata indichino
+  rispettivamente un rivestimento e la relativa quantità,
+* una *mappa* dai rivestimenti agli interi che ne indicano la quantità,
+* un *vettore* (o *lista*) di "record" ciascuno dei quali contenga una coppia
+  rivestimento e quantità.
+
+La prima possibilità richiede una certa attenzione nel mantenimento
+dell'invariante di rappresentazione (avere a che fare con due attributi che
+vanno mantenuti in modo coordinato può non essere del tutto banale), la seconda
+richiede l'uso delle Collections (che potrebbe non essere ovvio), mentre la
+terza sempra la più semplice.
+
+Procediamo quindi con l'implementare un record, che chiameremo `Componente`;
+osserviamo che è sensato che esso implementi l'interfaccia `Rivestimento` (è
+infatti in grado di calcolare la sua superficie e costo, essendogli nota quella
+del rivestimento da cui è composto e dalla sua quantità).
+
+:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
+:language: java
+:lines: 9 - 28
+:::
+
+Anche questa entità è immutabile, il suo stato è dato da due attributi che ne
+rappresentano lo stato a patto che il rivestimento sia non nullo e la quatità
+positiva, invariante che è controllato in costruzione.
+
+A questo punto lo stato della pavimentazione è semplicemente dato da una lista
+di componenti, tale rappresentazione è valida a patto che:
+
+* ai componenti non corrisponda un riferimento a `null`,
+* la lista non sia vuota e
+* nessun componente (contenuto nella lista) sia un riferimento a `null`.
+
+Lo stato ed il costruttore (che garantisce tale invariante) sono dati dal codice
+seguente:
+
+:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
+:language: java
+:lines: 31 - 39
+:emphasize-lines: 8
+:::
+
+Si noti la linea evidenziata in cui all'attributo della classe non è assegnato
+il valore del riferimento passato come parametro (che restando in possesso del
+chiamante renderebbe la esposta la rappresentazione), ma viene fatta una copia
+tramite il costruttore di `ArrayList` e quindi viene resa immutabile avvolgendo
+la copia con il metodo statico `Collections.unmodifiableList` che ne restituisce
+una versione non modificabile.

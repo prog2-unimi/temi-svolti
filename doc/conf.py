@@ -21,7 +21,7 @@ templates_path = ['_templates']
 language = 'it'
 exclude_patterns = []
 
-# -- MyST configuration ---------------------------------------------------
+# -- Misc configurations ---------------------------------------------------
 
 myst_enable_extensions = [
   'colon_fence',
