@@ -16,6 +16,78 @@ Esempi di piastrelle possono essere: triangolari (caratterizzate da base e
 altezza), quadrate (caratterizzate dalla lunghezza del lato), romboidali
 (caratterizzate dalla lunghezza delle due diagonali) e così via…
 
+### Cosa è necessario implementare
+
+Dovrà implementare una gerarchia di oggetti utili a rappresentare piastrelle e
+pavimentazioni e a conoscerne superfici e costi.
+
+In particolare dovrà essere possibile creare piastrelle di diverso tipo (a
+partire quanto meno dall'indicazione delle grandezze che le caratterizzano) e
+pavimentazioni (a partire quanto meno dalle loro componenti).
+
+Per verificare il comportamento del suo codice le può essere utile implementare
+una *classe di test* che, leggendo dal flusso di ingresso un elenco di azioni,
+le realizzi (creando le necessarie istanze di oggetti d'appoggio).
+
+Le azioni, indicate una per riga, sono specificate da un carattere seguito da
+uno o più numeri interi; ciascuna azione determina la creazione di una
+piastrella o pavimentazione, che si considerano pertanto indicizzate dal numero
+di riga in cui sono state create (le righe sono numerate a partire da 0). Le
+azioni sono:
+
+* `Q` seguita da due interi, crea una piastrella quadrata di lato e costo
+  assegnato;
+* `R` seguita da tre interi, crea una piastrella romboidale di diagonali e costo
+  assegnate;
+* `T` seguita da tre interi, crea una piastrella triangolare di base, altezza e
+  costo assegnati;
+* `P` seguita da *2n* interi, crea una pavimentazione; le *n* coppie di interi
+  rappresentano ciascuna la quantità e l'indice di una delle *n* piastrelle o
+  pavimentazioni di cui è costituita.
+
+Assuma che gli indici delle piastrelle, o pavimentazioni, che seguono la lettera
+`P` siano distinti e strettamente minori del numero di riga in cui compaiono
+(questo garantisce che le pavimentazioni siano in effetti insiemi e che una
+pavimentazione non comprenda mai, neppure indirettamente, sé stessa); assuma
+anche che le dimensioni siano sempre scelte in modo tale che la superficie
+risultante sia intera.
+
+Una volta lette tutte le azioni, l'esecuzione della classe di test termina
+stampando una linea per ciascuna pavimentazione creata (in ordine di creazione)
+contenente due interi (separati dal segno di tabulazione) corrispondenti alla
+sue superficie e costo.
+
+L'elenco di azioni che rappresenta le pavimentazioni dell'esempio nella sezione
+precedente è:
+
+    Q 2 3
+    P 42 0
+    R 4 2 5
+    P 65 2
+    P 1 1 2 3
+
+le prime due righe creano le piastrelle quadrate e la pavimentazione della
+cucina (che è quindi indicizzata dal numero 1), le righe di numero 2 e 3 creano
+le piastrelle romboidali e la pavimentazione del bagno (indicizzata dal numero
+3) e l'ultima riga crea la pavimentazione della casa (data da 1 pavimentazione
+della cucina, di indice 1, e 2 pavimentazioni del bagno, di indice 3).
+
+A fronte di tali azioni, la classe di test emette
+
+    168	126
+    260	325
+    688	776
+
+nel flusso d'uscita, dove l'ultima riga riporta i numeri calcolati nella
+precedente sezione, mentre le prime due sono il valori relativi rispettivamente
+a cucina e bagno.
+
+**Nota bene**: è possibile implementare anche altri tipi di piastrelle oltre a
+quadrati, rombi e triangoli (aggiungendo le opportune azioni alla classe di
+test), così come potrebbe essere opportuno aggiungere altri costruttori, o
+competenze *adeguate* (nel senso del termine illustrato durante il corso),
+rispetto a quelle strettamente necessarie per implementare la classe di test.
+
 ### La pavimentazione
 
 Una **pavimentazione** è costituita da una collezione (finita e non vuota) di
@@ -187,22 +259,28 @@ possibilità:
 La prima possibilità richiede una certa attenzione nel mantenimento
 dell'invariante di rappresentazione (avere a che fare con due attributi che
 vanno mantenuti in modo coordinato può non essere del tutto banale), la seconda
-richiede l'uso delle Collections (che potrebbe non essere ovvio), mentre la
-terza sempra la più semplice.
+richiede l'uso delle mappe (che potrebbe non essere ovvio), mentre la terza
+sempra la più semplice.
 
 Procediamo quindi con l'implementare un record, che chiameremo `Componente`;
 osserviamo che è sensato che esso implementi l'interfaccia `Rivestimento` (è
 infatti in grado di calcolare la sua superficie e costo, essendogli nota quella
-del rivestimento da cui è composto e dalla sua quantità).
+del rivestimento da cui è composto e dalla sua quantità — come mostrano le linee
+evidenziate).
 
 :::{literalinclude} ../../src/piastrelle/Pavimentazione.java
 :language: java
 :lines: 9 - 28
+:emphasize-lines: 12 - 20
 :::
 
 Anche questa entità è immutabile, il suo stato è dato da due attributi che ne
-rappresentano lo stato a patto che il rivestimento sia non nullo e la quatità
+rappresentano lo stato a patto che il rivestimento sia non nullo e la quantità
 positiva, invariante che è controllato in costruzione.
+
+Tale classe ha poco senso al di fuori dell'uso che ne faremo come parte di una
+pavimentazione, per questa ragione può essere implementata come classe interna
+(statica).
 
 A questo punto lo stato della pavimentazione è semplicemente dato da una lista
 di componenti, tale rappresentazione è valida a patto che:
@@ -211,7 +289,7 @@ di componenti, tale rappresentazione è valida a patto che:
 * la lista non sia vuota e
 * nessun componente (contenuto nella lista) sia un riferimento a `null`.
 
-Lo stato ed il costruttore (che garantisce tale invariante) sono dati dal codice
+Lo stato e il costruttore (che garantisce tale invariante) sono dati dal codice
 seguente:
 
 :::{literalinclude} ../../src/piastrelle/Pavimentazione.java
@@ -226,3 +304,67 @@ chiamante renderebbe la esposta la rappresentazione), ma viene fatta una copia
 tramite il costruttore di `ArrayList` e quindi viene resa immutabile avvolgendo
 la copia con il metodo statico `Collections.unmodifiableList` che ne restituisce
 una versione non modificabile.
+
+La rappresentazione scelta rende banale soddisfare l'interfaccia `Rivestimento`, sono infatti sufficienti poche linee di codice:
+
+:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
+:language: java
+:lines: 41 - 55
+:::
+
+La chiave di questo risultato è aver introdotto una interfaccia come supertipo
+di entrambe le componenti della pavimentazione, questo ha consentito di
+sviluppare `Componente` in modo elementare, senza dove distinguere i casi in cui
+il suo "contenuto" sia una piastrella, o un rivestimento.
+
+Per finire, è plausibile rendere la pavimentazione un iterabile di componenti
+(come mostrato dalle linee evidenziate), in questo modo è possibile comunicare
+all'esterno il suo stato senza che ne venga esposta la rappresentazione.
+
+Il codice completo della pavimentazione è il seguente:
+
+:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
+:language: java
+:emphasize-lines: 7, 57 - 60
+:::
+
+### La classe di test
+
+Una volta che ci si è dotati delle entità necessarie, l'implementazione della
+classe di test è elementare: è sufficiente il metodo `main` che conservi due liste (una per tutti i rivestimenti creati e una delle sole pavimentazioni)
+
+:::{literalinclude} ../../src/piastrelle/Soluzione.java
+:language: java
+:lines: 9 - 10
+:dedent: 6
+:::
+
+tali liste saranno popolate da un ciclo che legge tratta una linea per volta
+(ottenuta da uno `Scanner` che avvolge il flusso di ingresso); ciascuna linea
+può essere a sua volta avvolta in uno `Scanner` per suddividerla nelle sue parti
+(su cui agire con uno `switch`) secondo la seguente struttura
+
+:::{sourcecode} java
+
+try (final Scanner s = new Scanner(System.in)) {
+  while (s.hasNextLine())
+    try (final Scanner line = new Scanner(s.nextLine())) {
+      /* switch */
+    }
+}
+:::
+
+Il corpo dello `switch` decide cosa fare a seconda del primo carattere (della prima parola) della linea, quindi consuma gli altri interi per ottenere i parametri da passare ai costruttori.
+
+:::{literalinclude} ../../src/piastrelle/Soluzione.java
+:language: java
+:lines: 13 - 33
+:dedent: 10
+:emphasize-lines: 12 - 15
+:::
+
+Di particolare interesse è la parte evidenziata che costruisce una lista di
+componenti e la popola con un ciclo in cui vengono lette le quantità e gli
+indici dei rivestimenti da utilizzare per costruire la pavimentazione;
+l'invocazione `rivestimento.get(...)` è quella che permette di ottenere il
+rivestimento dato il suo indice.

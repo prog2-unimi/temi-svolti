@@ -7,33 +7,33 @@ public class Soluzione {
   public static void main(String[] args) {
     try (final Scanner s = new Scanner(System.in)) {
       final List<Rivestimento> rivestimento = new ArrayList<>();
-      while (s.hasNextLine()) {
-        final String line = s.nextLine();
-        try (final Scanner ss = new Scanner(line)) {
-          switch (ss.next().charAt(0)) {
+      final List<Pavimentazione> pavimentazione = new ArrayList<>();
+      while (s.hasNextLine())
+        try (final Scanner line = new Scanner(s.nextLine())) {
+          switch (line.next().charAt(0)) {
             case 'Q':
-              rivestimento.add(new PiastrellaQuadrata(ss.nextInt(), ss.nextInt()));
+              rivestimento.add(new PiastrellaQuadrata(line.nextInt(), line.nextInt()));
               break;
             case 'R':
-              rivestimento.add(new PiastrellaRomboidale(ss.nextInt(), ss.nextInt(), ss.nextInt()));
+              rivestimento.add(new PiastrellaRomboidale(line.nextInt(), line.nextInt(), line.nextInt()));
               break;
             case 'T':
-              rivestimento.add(new PiastrellaTriangolare(ss.nextInt(), ss.nextInt(), ss.nextInt()));
+              rivestimento.add(new PiastrellaTriangolare(line.nextInt(), line.nextInt(), line.nextInt()));
               break;
             case 'P':
               final List<Pavimentazione.Componente> componenti = new ArrayList<>();
-              while (ss.hasNextInt())
-                componenti.add(new Pavimentazione.Componente(ss.nextInt(), rivestimento.get(ss.nextInt())));
-              rivestimento.add(new Pavimentazione(componenti));
+              while (line.hasNextInt())
+                componenti.add(new Pavimentazione.Componente(line.nextInt(), rivestimento.get(line.nextInt())));
+              final Pavimentazione p = new Pavimentazione(componenti);
+              rivestimento.add(p);
+              pavimentazione.add(p);
               break;
             default:
               throw new IllegalArgumentException();
           }
         }
-      }
-      for (final Rivestimento r : rivestimento)
-        if (r instanceof Pavimentazione)
-          System.out.println(r.superficie() + "\t" + r.costo());
+      for (final Pavimentazione p : pavimentazione)
+        System.out.println(p.superficie() + "\t" + p.costo());
     }
   }
 }
