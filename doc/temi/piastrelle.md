@@ -16,6 +16,38 @@ Esempi di piastrelle possono essere: triangolari (caratterizzate da base e
 altezza), quadrate (caratterizzate dalla lunghezza del lato), romboidali
 (caratterizzate dalla lunghezza delle due diagonali) e così via…
 
+### La pavimentazione
+
+Una **pavimentazione** è costituita da una collezione (finita e non vuota) di
+piastrelle, o altre pavimentazioni; la sua *superficie* è pari alla somma delle
+superfici di tutte le piastrelle che contiene (direttamente o indirettamente) e
+il suo *costo* totale è dato dalla somma dei costi di tutte le piastrelle che
+contiene. Evidentemente una pavimentazione non può contenere sé stessa
+(direttamente o indirettamente).
+
+Se ad esempio:
+
+* la pavimentazione della cucina è fatta di 42 piastrelle quadrate di lato 2 e
+  prezzo 3,
+* quella del bagno è fatto di 65 piastrelle romboidali con diagonali di
+  lunghezza 4 e 2 con prezzo 5 e
+* la pavimentazione della casa è costituita da 1 pavimentazione della cucina più
+  2 pavimentazioni del bagno,
+
+la superficie della pavimentazione della casa è pari a
+
+    42 x (2 x 2) + 2 x [65 x (4 x 2) / 2] = 688
+
+dove il primo addendo corrisponde alla superficie della pavimentazione della
+cucina, mentre la quantità tra parentesi quadre corrisponde alla superficie
+della pavimentazione del bagno. Similmente, il costo della pavimentazione della
+casa è dato da
+
+    42 x 3 + 2 x [65 x 5] = 776
+
+dove i due addendi sono rispettivamente i costi della pavimentazione della
+cucina e dei due bagni.
+
 ### Cosa è necessario implementare
 
 Dovrà implementare una gerarchia di oggetti utili a rappresentare piastrelle e
@@ -87,38 +119,6 @@ quadrati, rombi e triangoli (aggiungendo le opportune azioni alla classe di
 test), così come potrebbe essere opportuno aggiungere altri costruttori, o
 competenze *adeguate* (nel senso del termine illustrato durante il corso),
 rispetto a quelle strettamente necessarie per implementare la classe di test.
-
-### La pavimentazione
-
-Una **pavimentazione** è costituita da una collezione (finita e non vuota) di
-piastrelle, o altre pavimentazioni; la sua *superficie* è pari alla somma delle
-superfici di tutte le piastrelle che contiene (direttamente o indirettamente) e
-il suo *costo* totale è dato dalla somma dei costi di tutte le piastrelle che
-contiene. Evidentemente una pavimentazione non può contenere sé stessa
-(direttamente o indirettamente).
-
-Se ad esempio:
-
-* la pavimentazione della cucina è fatta di 42 piastrelle quadrate di lato 2 e
-  prezzo 3,
-* quella del bagno è fatto di 65 piastrelle romboidali con diagonali di
-  lunghezza 4 e 2 con prezzo 5 e
-* la pavimentazione della casa è costituita da 1 pavimentazione della cucina più
-  2 pavimentazioni del bagno,
-
-la superficie della pavimentazione della casa è pari a
-
-    42 x (2 x 2) + 2 x [65 x (4 x 2) / 2] = 688
-
-dove il primo addendo corrisponde alla superficie della pavimentazione della
-cucina, mentre la quantità tra parentesi quadre corrisponde alla superficie
-della pavimentazione del bagno. Similmente, il costo della pavimentazione della
-casa è dato da
-
-    42 x 3 + 2 x [65 x 5] = 776
-
-dove i due addendi sono rispettivamente i costi della pavimentazione della
-cucina e dei due bagni.
 
 ## Una prima bozza di specificazione
 
