@@ -35,8 +35,7 @@ html_theme_options = {
   'logo_only': True,
   'toc_title': 'Sezioni',
   'show_prev_next': False,
-  'extra_navbar': '',
-  'show_navbar_depth': 2
+  'extra_navbar': ''
 }
 html_logo = '_static/logo.png'
 html_show_copyright = False
@@ -45,3 +44,8 @@ html_last_updated_fmt = '%-d/%-m/%y'
 # -- Options for LaTeX output -------------------------------------------------
 
 latex_logo = '_static/logo.png'
+latex_toplevel_sectioning = 'part'
+latex_documents = [
+    ('index_tex', 'temi-svolti.tex', "Prog2@UniMI - Temi d'esame svolti",
+     'Massimo Santini', 'report', False)
+]
