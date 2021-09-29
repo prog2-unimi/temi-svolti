@@ -18,5 +18,4 @@ intro/consegne
 :hidden:
 
 temi/piastrelle
-temi/algebretta
 :::

@@ -11,20 +11,24 @@ project = "Temi d'esame svolti"
 copyright = '2021'
 author = ''
 
+# -- General configuration ---------------------------------------------------
+
+extensions = [
+  'myst_parser',
+  'sphinxcontrib.mermaid'
+]
+templates_path = ['_templates']
+language = 'it'
+exclude_patterns = []
+
 # -- MyST configuration ---------------------------------------------------
 
 myst_enable_extensions = [
   'colon_fence',
 ]
 
-# -- General configuration ---------------------------------------------------
-
-extensions = [
-  'myst_parser',
-]
-templates_path = ['_templates']
-language = 'it'
-exclude_patterns = []
+mermaid_pdfcrop = 'pdfcrop'
+mermaid_cmd = './bin/dmmdc'
 
 # -- Options for HTML output -------------------------------------------------
 
