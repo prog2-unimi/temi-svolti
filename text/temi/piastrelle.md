@@ -1,6 +1,23 @@
+---
+jupytext:
+  formats: md:myst
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+```{code-cell}
+:tags:  [remove-input]
+from tslib import Solution
+sol = Solution('piastrelle')
+```
 # Piastrelle
 
-## Le entità
+## La traccia
 
 La traccia inizia con l'elencazione di alcune delle entità utili a gestire
 alcuni aspetti dell'attività di un piastrellista.
@@ -120,7 +137,7 @@ test), così come potrebbe essere opportuno aggiungere altri costruttori, o
 competenze *adeguate* (nel senso del termine illustrato durante il corso),
 rispetto a quelle strettamente necessarie per implementare la classe di test.
 
-## Una prima bozza di specificazione
+## La soluzione
 
 Una prima domanda da porsi riguarda la *mutabilità*, che non appare necessaria
 dato il problema assegnato che consiste nel descrivere alcuni rivestimenti
@@ -154,10 +171,10 @@ Rivestimento <|-- Pavimentazione
 
 la cui interfaccia corrisponde al seguente codice
 
-:::{literalinclude} ../../src/piastrelle/Rivestimento.java
-:language: java
-:::
-
+```{code-cell}
+:tags:  [remove-input]
+sol.show('Rivestimento')
+```
 ### Le piastrelle
 
 Per quanto concerne le piastrelle, ne sono presenti di diverso tipo, distinte
@@ -199,9 +216,10 @@ Piastrella <|-- PiastrellaRomboidale
 
 Un primo abbozzo di implementazione della piastrella è dato dal seguente codice
 
-:::{literalinclude} ../../src/piastrelle/Piastrella.java
-:language: java
-:::
+```{code-cell}
+:tags:  [remove-input]
+sol.show('Piastrella', highlight = 'rappr')
+```
 
 Occorre osservare che la classe è astratta in quanto il metodo `superficie`
 prescritto dall'interfaccia che implementa non è un suo metodo concreto (ragione
@@ -213,23 +231,17 @@ suo valore resti immutabile; sebbene potrebbe essere esposto come `public`, per
 soddisfare l'interfaccia è necessario l'uso di un *getter*. Unica accortezza,
 dal momento che il costo deve essere positivo (unico invariante di
 rappresentazione della classe) è necessario controllarne il valore in
-costruzione.
+costruzione (come mostra la linea evidenziata nel codice precedente).
 
 Le sottoclassi concrete sono elementari da implementare. Una bozza di codice che
 comprenda solo un costruttore e quanto necessario a soddisfare l'interfaccia
-(ereditata dalla classe astratta) è il seguente
+(ereditata dalla classe astratta) è (per la sola piastrella romboidale) il
+seguente
 
-:::{literalinclude} ../../src/piastrelle/PiastrellaQuadrata.java
-:language: java
-:::
-
-:::{literalinclude} ../../src/piastrelle/PiastrellaRomboidale.java
-:language: java
-:::
-
-:::{literalinclude} ../../src/piastrelle/PiastrellaTriangolare.java
-:language: java
-:::
+```{code-cell}
+:tags:  [remove-input]
+sol.show('PiastrellaRomboidale', highlight = 'rappr')
+```
 
 Osserviamo che gli attributi sono rappresentabili con variabili di tipo
 primitivo, l'immutabilità è quindi garantita dall'attributo `final` ed è
@@ -241,7 +253,8 @@ comodo che il costruttore accetti due valori per le diagonali (comunque
 ordinati, per facilitare l'uso del costruttore da parte degli utenti della
 classe), ma è ragionevole che la rappresentazione distingua la maggiore dalla
 minore: questo richiede che l'assegnamento dei parametri del costruttore agli
-attributi della classe sia fatto avvedutamente.
+attributi della classe sia fatto avvedutamente (come mostra il codice
+evidenziato).
 
 ### La pavimentazione
 
@@ -268,11 +281,14 @@ infatti in grado di calcolare la sua superficie e costo, essendogli nota quella
 del rivestimento da cui è composto e dalla sua quantità — come mostrano le linee
 evidenziate).
 
-:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
-:language: java
-:lines: 9 - 28
-:emphasize-lines: 12 - 20
-:::
+```{code-cell}
+:tags:  [remove-input]
+sol.show(
+  'Pavimentazione',
+  'componente',
+  'componente_rivestimento'
+)
+```
 
 Anche questa entità è immutabile, il suo stato è dato da due attributi che ne
 rappresentano lo stato a patto che il rivestimento sia non nullo e la quantità
@@ -292,25 +308,28 @@ di componenti, tale rappresentazione è valida a patto che:
 Lo stato e il costruttore (che garantisce tale invariante) sono dati dal codice
 seguente:
 
-:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
-:language: java
-:lines: 31 - 39
-:emphasize-lines: 8
-:::
+```{code-cell}
+:tags:  [remove-input]
+sol.show(
+  'Pavimentazione',
+  'rappr',
+  'copyof'
+)
+```
 
 Si noti la linea evidenziata in cui all'attributo della classe non è assegnato
 il valore del riferimento passato come parametro (che restando in possesso del
 chiamante renderebbe la esposta la rappresentazione), ma viene fatta una copia
-tramite il costruttore di `ArrayList` e quindi viene resa immutabile avvolgendo
-la copia con il metodo statico `Collections.unmodifiableList` che ne restituisce
-una versione non modificabile.
+tramite il metodo di fabbricazione di
+[`List.copyOf`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html#copyOf(java.util.Collection))
+il quale, tra l'altro, assicura che `componenti` non sia e non contenga `null`.
 
 La rappresentazione scelta rende banale soddisfare l'interfaccia `Rivestimento`, sono infatti sufficienti poche linee di codice:
 
-:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
-:language: java
-:lines: 41 - 55
-:::
+```{code-cell}
+:tags:  [remove-input]
+sol.show('Pavimentazione', 'rivestimento')
+```
 
 La chiave di questo risultato è aver introdotto una interfaccia come supertipo
 di entrambe le componenti della pavimentazione, questo ha consentito di
@@ -318,26 +337,26 @@ sviluppare `Componente` in modo elementare, senza dove distinguere i casi in cui
 il suo "contenuto" sia una piastrella, o un rivestimento.
 
 Per finire, è plausibile rendere la pavimentazione un iterabile di componenti
-(come mostrato dalle linee evidenziate), in questo modo è possibile comunicare
-all'esterno il suo stato senza che ne venga esposta la rappresentazione.
 
-Il codice completo della pavimentazione è il seguente:
+```{code-cell}
+:tags:  [remove-input]
+sol.show('Pavimentazione', 'iterable')
+```
 
-:::{literalinclude} ../../src/piastrelle/Pavimentazione.java
-:language: java
-:emphasize-lines: 7, 57 - 60
-:::
+in questo modo è possibile comunicare all'esterno il suo stato senza che ne
+venga esposta la rappresentazione.
+
 
 ### La classe di test
 
 Una volta che ci si è dotati delle entità necessarie, l'implementazione della
-classe di test è elementare: è sufficiente il metodo `main` che conservi due liste (una per tutti i rivestimenti creati e una delle sole pavimentazioni)
+classe di test è elementare: è sufficiente il metodo `main` che conservi due
+liste (una per tutti i rivestimenti creati e una delle sole pavimentazioni)
 
-:::{literalinclude} ../../src/piastrelle/Soluzione.java
-:language: java
-:lines: 9 - 10
-:dedent: 6
-:::
+```{code-cell}
+:tags:  [remove-input]
+sol.show('Soluzione', 'rappr')
+```
 
 tali liste saranno popolate da un ciclo che legge tratta una linea per volta
 (ottenuta da uno `Scanner` che avvolge il flusso di ingresso); ciascuna linea
@@ -354,14 +373,15 @@ try (final Scanner s = new Scanner(System.in)) {
 }
 :::
 
-Il corpo dello `switch` decide cosa fare a seconda del primo carattere (della prima parola) della linea, quindi consuma gli altri interi per ottenere i parametri da passare ai costruttori.
+Il corpo dello `switch` decide cosa fare a seconda del primo carattere (della
+prima parola) della linea, quindi consuma gli altri interi per ottenere i
+parametri da passare ai costruttori.
 
-:::{literalinclude} ../../src/piastrelle/Soluzione.java
-:language: java
-:lines: 13 - 33
-:dedent: 10
-:emphasize-lines: 12 - 15
-:::
+
+```{code-cell}
+:tags:  [remove-input]
+sol.show('Soluzione', 'switch', 'mkpav')
+```
 
 Di particolare interesse è la parte evidenziata che costruisce una lista di
 componenti e la popola con un ciclo in cui vengono lette le quantità e gli

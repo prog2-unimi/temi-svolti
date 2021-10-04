@@ -9,7 +9,7 @@ public class Soluzione {
       final List<Rivestimento> rivestimento = new ArrayList<>();
       final List<Pavimentazione> pavimentazione = new ArrayList<>();
       while (s.hasNextLine())
-        try (final Scanner line = new Scanner(s.nextLine())) {
+      try (final Scanner line = new Scanner(s.nextLine())) {
           switch (line.next().charAt(0)) {
             case 'Q':
               rivestimento.add(new PiastrellaQuadrata(line.nextInt(), line.nextInt()));
@@ -25,8 +25,8 @@ public class Soluzione {
               while (line.hasNextInt())
                 componenti.add(new Pavimentazione.Componente(line.nextInt(), rivestimento.get(line.nextInt())));
               final Pavimentazione p = new Pavimentazione(componenti);
-              rivestimento.add(p);
               pavimentazione.add(p);
+              rivestimento.add(p);
               break;
             default:
               throw new IllegalArgumentException();

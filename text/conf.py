@@ -14,7 +14,8 @@ author = ''
 # -- General configuration ---------------------------------------------------
 
 extensions = [
-  'myst_parser',
+#  'myst_parser',
+  'myst_nb',
   'sphinxcontrib.mermaid'
 ]
 templates_path = ['_templates']
@@ -29,6 +30,7 @@ myst_enable_extensions = [
 
 mermaid_pdfcrop = 'pdfcrop'
 mermaid_cmd = './bin/dmmdc'
+#mermaid_params = ['--width', '400', '--backgroundColor', 'transparent']
 
 # -- Options for HTML output -------------------------------------------------
 

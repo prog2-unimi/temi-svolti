@@ -1,15 +1,30 @@
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * La pavimentazione.
+ *
+ *
+ */
 public class Pavimentazione implements Rivestimento, Iterable<Pavimentazione.Componente> {
 
   public static class Componente implements Rivestimento {
+
+    /*
+      multi
+     */
+    // Commento a linea singola
     public final Rivestimento rivestimento;
     public final int quantità;
 
+    /**
+     * Costruisce una pavimentazione.
+     *
+     * @param quantità
+     * @param rivestimento
+     * @throws IllegalArgumentException
+     */
     public Componente(final int quantità, final Rivestimento rivestimento) {
       this.rivestimento = Objects.requireNonNull(rivestimento);
       if (quantità <= 0)
@@ -26,16 +41,15 @@ public class Pavimentazione implements Rivestimento, Iterable<Pavimentazione.Com
     public int superficie() {
       return quantità * rivestimento.superficie();
     }
+
   }
 
   private final List<Componente> componenti;
 
   public Pavimentazione(final List<Componente> componenti) {
-    Objects.requireNonNull(componenti);
+    this.componenti = List.copyOf(componenti);
     if (componenti.size() == 0)
       throw new IllegalArgumentException("Ci deve essere almeno una componente");
-    for (Componente c: componenti) Objects.requireNonNull(c);
-    this.componenti = Collections.unmodifiableList(new ArrayList<>(componenti));
   }
 
   @Override
