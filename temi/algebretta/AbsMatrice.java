@@ -20,22 +20,16 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-/**
- * Il <em>rivestimento</em> rappresenta una qualunque entità dotata di <em>costo</em> e
- * <em>superficie</em> (comunque tali informazioni siano memorizzate, o calcolate).
- */
-public interface Rivestimento {
-  /**
-   * Restituisce il costo del rivestimento.
-   *
-   * @return il costo, ha sempre valore positivo.
-   */
-  int costo();
-
-  /**
-   * Restituisce la superficie del rivestimento.
-   *
-   * @return la superficie, ha sempre valore positivo.
-   */
-  int superficie();
+public abstract class AbsMatrice implements Matrice {
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("[");
+    for (int i = 0; i < dim(); i++) {
+      for (int j = 0; j < dim(); j++) sb.append(val(i, j) + (j < dim() - 1 ? ", " : ""));
+      if (i < dim() - 1) sb.append("; ");
+    }
+    sb.append("]");
+    return sb.toString();
+  }
 }

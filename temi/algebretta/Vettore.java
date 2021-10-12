@@ -20,22 +20,22 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-/**
- * Il <em>rivestimento</em> rappresenta una qualunque entità dotata di <em>costo</em> e
- * <em>superficie</em> (comunque tali informazioni siano memorizzate, o calcolate).
- */
-public interface Rivestimento {
-  /**
-   * Restituisce il costo del rivestimento.
-   *
-   * @return il costo, ha sempre valore positivo.
-   */
-  int costo();
+public interface Vettore {
 
-  /**
-   * Restituisce la superficie del rivestimento.
-   *
-   * @return la superficie, ha sempre valore positivo.
-   */
-  int superficie();
+  int dim();
+
+  int val(final int i);
+
+  Vettore per(final int alpha);
+
+  Vettore più(final Vettore v);
+
+  default boolean conforme(final Vettore v) {
+    return dim() == v.dim();
+  }
+
+  default boolean conforme(final Matrice M) {
+    return dim() == M.dim();
+  }
+
 }
