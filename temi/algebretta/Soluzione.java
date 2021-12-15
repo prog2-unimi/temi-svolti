@@ -55,7 +55,7 @@ public class Soluzione {
             System.out.println(M.più(N));
           }
         } else { // op == '*', altrimenti partiOperazione solleva eccezione
-          if (Parser.èScalare(left)) {
+        if (Parser.èScalare(left)) {
             int alpha = Parser.valoreScalare(left);
             if (Parser.èVettore(right)) {
               Vettore v = new VettoreDenso(Parser.valoriVettore(right));
