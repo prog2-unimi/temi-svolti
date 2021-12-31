@@ -31,10 +31,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
-/**
- * Classe mutabile che rappreseta una <em>shell</em>
- *
- */
+/** Classe mutabile che rappreseta una <em>shell</em> */
 public class Shell {
 
   /** Prefisso per l'output. */
@@ -48,7 +45,7 @@ public class Shell {
   /**
    * Costruisce una <em>shell</em> dato il filesystem.
    *
-   * <p> La <em>directory corrente</em> è inzialmente la radice del <em>filesystem</em>.
+   * <p>La <em>directory corrente</em> è inzialmente la radice del <em>filesystem</em>.
    *
    * @param fs il filesystem
    * @throws NullPointerException se il filesystem è <code>null</code>.
@@ -74,9 +71,8 @@ public class Shell {
   /**
    * Emette nel flusso d'scita la <em>direcotry</em> data sotto forma di albero.
    *
-   * <p>Questa funzione richiama ricorsivamente se stessa per emettere
-   * le sottodirectory in forma di albero, usa il prefisso per gestire
-   * l'indentazione dei sottoalberi.
+   * <p>Questa funzione richiama ricorsivamente se stessa per emettere le sottodirectory in forma di
+   * albero, usa il prefisso per gestire l'indentazione dei sottoalberi.
    *
    * @param prefix il prefisso da anteporre ad ogni linea emessa.
    * @param d la directory il cuil albero è da emettere.
@@ -91,8 +87,7 @@ public class Shell {
   }
 
   /**
-   * Emette nel flusso d'uscita la <em>directory</em> corrispondente al
-   * <em>path</em> dato.
+   * Emette nel flusso d'uscita la <em>directory</em> corrispondente al <em>path</em> dato.
    *
    * @param path il percorso di una directory del filesystem.
    * @throws FileNotFoundException se il percorso non individua una directory.
@@ -104,13 +99,12 @@ public class Shell {
   /**
    * Esegue l'interprete di comandi.
    *
-   * <p>Questa classe legge una linea alla volta dal {@link BufferedReader} fino
-   * a quando legge una linea vuota. Per ciascuna linea, interpreta il comando
-   * che contiene, riportando gli errori eventualmente riportati durante la sua esecuzione.
-   * Al termine dell'esecuzione, restituisce l'elenco dei comandi ricevuti.
+   * <p>Questa classe legge una linea alla volta dal {@link BufferedReader} fino a quando legge una
+   * linea vuota. Per ciascuna linea, interpreta il comando che contiene, riportando gli errori
+   * eventualmente riportati durante la sua esecuzione. Al termine dell'esecuzione, restituisce
+   * l'elenco dei comandi ricevuti.
    *
-   * @param con il {@link BufferedReader} da cui vengono letti le linee
-   * contenenti i comandi.
+   * @param con il {@link BufferedReader} da cui vengono letti le linee contenenti i comandi.
    * @return l'elenco di comandi ricevuti.
    * @throws IOException se avviene un errore durante la lettura delle linee.
    */
@@ -165,14 +159,11 @@ public class Shell {
   }
 
   /**
-   * Istanzia l'interprete in modo che legga il flusso di ingresso standard; se
-   * il programma è invocato con degli argomenti, al termine dell'esecuzione
-   * emette la storia dei comandi ricevuti.
+   * Istanzia l'interprete in modo che legga il flusso di ingresso standard; se il programma è
+   * invocato con degli argomenti, al termine dell'esecuzione emette la storia dei comandi ricevuti.
    *
-   * @param args gli argomenti del comando, se presenti verrà emesso l'elenco
-   * dei comandi.
-   * @throws IOException se avviene un errore durante la lettura del flusso di
-   * ingresso.
+   * @param args gli argomenti del comando, se presenti verrà emesso l'elenco dei comandi.
+   * @throws IOException se avviene un errore durante la lettura del flusso di ingresso.
    */
   public static void main(String[] args) throws IOException {
     final Shell shell = new Shell(new FileSystem());
