@@ -26,8 +26,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
- * Classe astratta che rappresenta i listini in cui il prezzo di un certo numero di giocattoli di un
- * certo tipo dipende dal prezzo unitario di un giocattolo di tale tipo.
+ * Classe astratta immutabile che rappresenta i listini in cui il prezzo di un certo numero di
+ * giocattoli di un certo tipo dipende dal prezzo unitario di un giocattolo di tale tipo.
  */
 public abstract class AbstracListinoUnitario implements Listino {
 
@@ -70,7 +70,7 @@ public abstract class AbstracListinoUnitario implements Listino {
   }
 
   @Override
-  public boolean contiene(final Giocattolo giocattolo) {
+  public boolean conosce(final Giocattolo giocattolo) {
     return prezzoUnitario.containsKey(Objects.requireNonNull(giocattolo));
   }
 

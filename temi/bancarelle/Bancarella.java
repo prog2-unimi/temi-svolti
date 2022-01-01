@@ -61,7 +61,7 @@ public class Bancarella implements Iterable<Giocattolo> {
     this.listino = Objects.requireNonNull(listino);
     this.inventario = Objects.requireNonNull(inventario);
     for (final Giocattolo g : inventario)
-      if (!listino.contiene(g))
+      if (!listino.conosce(g))
         throw new IllegalArgumentException("Il listino manca del prezzo per: " + g);
   }
 
@@ -81,6 +81,17 @@ public class Bancarella implements Iterable<Giocattolo> {
   }
 
   /**
+   * Restituisce la quantità del giocattolo specificato nell'inventario della bancarella.
+   *
+   * @param giocattolo il giocattolo.
+   * @return il numero di giocattoli specificato nell'inventario della bancarella (eventualmente 0).
+   * @throws NullPointerException se giocattolo è <code>null</code>
+   */
+  public int quantità(final Giocattolo giocattolo) {
+    return inventario.quantità(giocattolo);
+  }
+
+  /**
    * Restituisce il prezzo della quantità indicata del giocattolo specificato.
    *
    * @param num la quantità di cui determinare il prezzo.
@@ -94,17 +105,6 @@ public class Bancarella implements Iterable<Giocattolo> {
     return listino.prezzo(num, giocattolo);
   }
 
-  /**
-   * Restituisce la quantità del giocattolo specificato nell'inventario della bancarella.
-   *
-   * @param giocattolo il giocattolo.
-   * @return il numero di giocattoli specificato nell'inventario della bancarella (eventualmente 0).
-   * @throws NullPointerException se giocattolo è <code>null</code>
-   */
-  public int quanti(final Giocattolo giocattolo) {
-    return inventario.quanti(giocattolo);
-  }
-
   @Override
   public Iterator<Giocattolo> iterator() {
     return inventario.iterator();
@@ -116,7 +116,7 @@ public class Bancarella implements Iterable<Giocattolo> {
     result.append("Bancarella di: " + proprietario + "\n");
     for (final Giocattolo g : inventario)
       result.append(
-          "num. " + inventario.quanti(g) + " " + g + ", prezzo: " + listino.prezzo(1, g) + "\n");
+          "num. " + inventario.quantità(g) + " " + g + ", prezzo: " + listino.prezzo(1, g) + "\n");
     return result.toString();
   }
 }

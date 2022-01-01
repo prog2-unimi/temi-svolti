@@ -62,10 +62,10 @@ public class ListinoScontato extends AbstracListinoUnitario {
   @Override
   public int prezzo(int num, Giocattolo giocattolo) {
     if (num <= 0) throw new IllegalArgumentException("Il numero deve essere positivo");
-    if (num < soglia) return prezzoUnitario(giocattolo) * num;
-    else {
-      int p = prezzoUnitario(giocattolo);
-      return soglia * p + (int) (((num - soglia) * p * (100 - sconto)) / 100.0);
-    }
+    final int prezzoUnitario = prezzoUnitario(giocattolo);
+    return num < soglia
+        ? prezzoUnitario * num
+        : soglia * prezzoUnitario
+            + (int) (((num - soglia) * prezzoUnitario * (100 - sconto)) / 100.0);
   }
 }

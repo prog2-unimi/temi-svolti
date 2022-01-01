@@ -47,6 +47,11 @@ public class Acquisto implements Iterable<Bancarella> {
   /** Il prezzo totale e la quantità complessiva di giocattoli nell'acquisto. */
   private int prezzo = 0, quantità = 0;
 
+  // RI: giocatolo e descrizione non sono nulli, la mappa non contiene null e
+  // gli interi sono tutti positivi; quantità ha per valore la somma degli
+  // interi della mappa e prezzo la somma dei prezzi (di ciascuna bancarella, a
+  // fronte di un acquisto del numero di giocattoli acquistati presso di essa).
+
   /**
    * Costruisce un acquisto del dato giocattolo.
    *
