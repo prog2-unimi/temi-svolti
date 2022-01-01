@@ -20,9 +20,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Classe astratta che rappresenta un compratore.
@@ -34,20 +33,24 @@ import java.util.Objects;
 public abstract class AbstractCompratore {
 
   /** L'elenco di bancarelle da cui effettuare gli acquisti. */
-  protected final List<Bancarella> bancarelle;
+  protected final Set<Bancarella> bancarelle;
 
   // RI: bancarelle non è e non contiene <code>null</code>,
 
   /**
-   * Costruisce un compratore a partire dall'elenco di bancarelle da cui acquistare.
+   * Costruisce un compratore a partire dall'elenco di bancarelle da cui
+   * acquistare.
    *
    * @param bancarelle le bancarelle.
+   * @throws NullPointerException se le bancarello sono, o contengono,
+   * <code>null</code>.
+   * @throws IllegalArgumentException se l'insieme di bancarelle è vuoto.
    */
-  public AbstractCompratore(final Collection<Bancarella> bancarelle) {
+  public AbstractCompratore(final Set<Bancarella> bancarelle) {
     Objects.requireNonNull(bancarelle);
     if (bancarelle.isEmpty())
       throw new IllegalArgumentException("Il mercatino deve contenere almeno una bancarella");
-    this.bancarelle = List.copyOf(bancarelle);
+      this.bancarelle = Set.copyOf(bancarelle);
   }
 
   /**
@@ -60,7 +63,7 @@ public abstract class AbstractCompratore {
    */
   public int quantità(final Giocattolo giocattolo) {
     int quantità = 0;
-    for (final Bancarella b : bancarelle) quantità += b.quanti(giocattolo);
+    for (final Bancarella b : bancarelle) quantità += b.quantità(giocattolo);
     return quantità;
   }
 

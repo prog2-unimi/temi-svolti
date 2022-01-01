@@ -20,11 +20,11 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Soluzione {
 
@@ -38,30 +38,32 @@ public class Soluzione {
     final Scanner s = new Scanner(System.in);
 
     final int numBancarelle = s.nextInt();
-    final List<Bancarella> bancarelle = new ArrayList<>(numBancarelle);
+    final Set<Bancarella> bancarelle = new HashSet<>(numBancarelle);
+    final Map<Giocattolo, Integer> giocattolo2prezzo = new HashMap<>();
+    final Inventario inventario = new Inventario();
 
     for (int b = 0; b < numBancarelle; b++) {
+      /* Lettura di una bancarella */
       final String proprietario = s.next();
-      final Map<Giocattolo, Integer> inventario = new HashMap<>();
-      final Map<Giocattolo, Integer> listino = new HashMap<>();
       final int numGiochi = s.nextInt();
       for (int g = 0; g < numGiochi; g++) {
+        /* Lettura dei giochi della bancarella */
         final int num = s.nextInt();
         final String nome = s.next();
         final String materiale = s.next();
         final int prezzo = s.nextInt();
-        final Giocattolo gg = new Giocattolo(nome, materiale);
-        inventario.put(gg, num);
-        listino.put(gg, prezzo);
+        final Giocattolo giocattolo = new Giocattolo(nome, materiale);
+        inventario.aggiungi(num, giocattolo);
+        giocattolo2prezzo.put(giocattolo, prezzo);
       }
-      final Bancarella bb =
-          new Bancarella(proprietario, new Inventario(inventario), new ListinoLineare(listino));
-      bancarelle.add(bb);
+      final Listino listino = new ListinoLineare(giocattolo2prezzo);
+      final Bancarella bancarella = new Bancarella(proprietario, inventario, listino);
+      bancarelle.add(bancarella);
     }
     s.close();
+    final CompratoreMinimoUnitario compratore = new CompratoreMinimoUnitario(bancarelle);
 
-    final CompratoreMinimoUnitario m = new CompratoreMinimoUnitario(bancarelle);
-    final Acquisto ordine = m.compra(numDaComprare, giocattoloDaComprare);
+    final Acquisto ordine = compratore.compra(numDaComprare, giocattoloDaComprare);
     System.out.println(ordine);
   }
 }
