@@ -15,8 +15,8 @@ Il contenuto di questo sito è *generato automaticamente* a partire di sorgenti 
 
 Gli studenti interessati sono caldamente consigliati di:
 
-- prendere dapprima visione dell'[accurata discussione](https://prog2unimi-temi-svolti.netlify.app/) degli svolgimenti, prima di
-- consultare i [sorgenti](https://github.com/prog2-unimi/temi-svolti/tree/master/temi) in questo repository.
+- prendere dapprima visione dell'[accurata discussione](https://prog2unimi-temi-svolti.netlify.app/) degli svolgimenti,
+- quindi consultare i [sorgenti](https://github.com/prog2-unimi/temi-svolti/tree/master/temi) in questo repository.
 
 L'obiettivo dev'essere dapprima riflettere sulle scelte implementative
 (presentate nella discussione), prima di procedere alla lettura delle soluzioni.
