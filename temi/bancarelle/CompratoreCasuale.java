@@ -37,8 +37,8 @@ public class CompratoreCasuale extends AbstractCompratore {
   private final Random rng = new Random();
 
   /**
-   * Costruisce un compratore (permettendo di specificare il seme del
-   * generatore, per consentire la riproduciblità dell'esecuzione).
+   * Costruisce un compratore (permettendo di specificare il seme del generatore, per consentire la
+   * riproduciblità dell'esecuzione).
    *
    * @param bancarelle le bancarelle.
    * @param seed il seme del genratore casuale.
@@ -50,8 +50,7 @@ public class CompratoreCasuale extends AbstractCompratore {
   }
 
   /**
-   * Costruisce un compratore (il seme è dato dal tempo corrente
-   * all'esecuzione).
+   * Costruisce un compratore (il seme è dato dal tempo corrente all'esecuzione).
    *
    * @param bancarelle le bancarelle.
    * @see AbstractCompratore

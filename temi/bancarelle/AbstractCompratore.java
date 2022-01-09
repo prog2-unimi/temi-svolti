@@ -38,19 +38,17 @@ public abstract class AbstractCompratore {
   // RI: bancarelle non è e non contiene <code>null</code>,
 
   /**
-   * Costruisce un compratore a partire dall'elenco di bancarelle da cui
-   * acquistare.
+   * Costruisce un compratore a partire dall'elenco di bancarelle da cui acquistare.
    *
    * @param bancarelle le bancarelle.
-   * @throws NullPointerException se le bancarello sono, o contengono,
-   * <code>null</code>.
+   * @throws NullPointerException se le bancarello sono, o contengono, <code>null</code>.
    * @throws IllegalArgumentException se l'insieme di bancarelle è vuoto.
    */
   public AbstractCompratore(final Set<Bancarella> bancarelle) {
     Objects.requireNonNull(bancarelle);
     if (bancarelle.isEmpty())
       throw new IllegalArgumentException("Il mercatino deve contenere almeno una bancarella");
-      this.bancarelle = Set.copyOf(bancarelle);
+    this.bancarelle = Set.copyOf(bancarelle);
   }
 
   /**

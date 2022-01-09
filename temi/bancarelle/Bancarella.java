@@ -25,16 +25,14 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
- * Una bancarella ha un proprietario ed espone un certo insieme di giocattoli
- * che può vendere.
+ * Una bancarella ha un proprietario ed espone un certo insieme di giocattoli che può vendere.
  *
- * <p> È un {@link Iterable} dei giocattoli che contiene il suo inventario, in
- * ordine lessicografico della loro rappresentazione testuale.
+ * <p>È un {@link Iterable} dei giocattoli che contiene il suo inventario, in ordine lessicografico
+ * della loro rappresentazione testuale.
  *
- * <p> Dal momento che le bancarelle entreranno in diverse *collections*
- * sono stati sovrascritti i metodi `equals` e `hashCode` in modo che siano
- * uguali (ai fini del progetto) bancarelle col medesimo propirietario
- * (indipendentemente da inventaroi e listino).
+ * <p>Dal momento che le bancarelle entreranno in diverse *collections* sono stati sovrascritti i
+ * metodi `equals` e `hashCode` in modo che siano uguali (ai fini del progetto) bancarelle col
+ * medesimo propirietario (indipendentemente da inventaroi e listino).
  */
 public class Bancarella implements Iterable<Giocattolo> {
 
@@ -119,7 +117,7 @@ public class Bancarella implements Iterable<Giocattolo> {
   @Override
   public boolean equals(Object other) {
     if (!(other instanceof Bancarella)) return false;
-    return ((Bancarella)other).proprietario.equals(proprietario);
+    return ((Bancarella) other).proprietario.equals(proprietario);
   }
 
   @Override
