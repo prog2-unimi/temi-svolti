@@ -67,6 +67,16 @@ public class Inventario implements Iterable<Giocattolo> {
   }
 
   /**
+   * Costruisce una copia dell'inventario dato.
+   *
+   * @param originale l'inventario di cui effettuare una copia.
+   * @throws NullPointerException se inventario è <code>null</code>.
+   */
+  public Inventario(final Inventario originale) {
+    this(originale.inventario);
+  }
+
+  /**
    * Aggiunge un certo numero di giocattoli dello stesso tipo all'inventario. Se sono già presenti
    * giocattoli di quel tipo, ne aggiorna il numero.
    *
