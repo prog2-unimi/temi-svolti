@@ -11,7 +11,9 @@ II](https://prog2.di.unimi.it/) del corso di laurea in
 [Informatica](https://informatica.cdl.unimi.it/it) dell'[Università degli Studi
 di Milano](http://www.unimi.it/).
 
-Il contenuto di questo sito è *generato automaticamente* a partire di sorgenti annotati nel nel repository [prog2-unimi/temi-svoti-discussione](https://github.com/prog2-unimi/temi-svoti-discussione/tree/master/sorgenti/src/main/java/it/unimi/di/prog2/temisvolti).
+Il contenuto di questo sito è *generato automaticamente* a partire di sorgenti
+annotati nel repository
+[prog2-unimi/temi-svoti-discussione](https://github.com/prog2-unimi/temi-svoti-discussione/tree/master/sorgenti/src/main/java/it/unimi/di/prog2/temisvolti).
 
 Gli studenti interessati sono caldamente consigliati di:
 
