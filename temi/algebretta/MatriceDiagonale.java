@@ -22,10 +22,22 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 import java.util.Objects;
 
+/** Classe che implementa una matrice diagonale. */
 public class MatriceDiagonale extends AbsMatrice {
 
+  /** I valori lungo la diagonale. */
   private final int[] diagonale;
 
+  // AF: l'i-esimo elemento della diagonale della matrice coincide con l'i-esimo
+  // elemento dell'array
+  // RI: diagonale non è null
+
+  /**
+   * Costruisce una matrice diagonale dati i valori lungo la diagonale.
+   *
+   * @param diagonale i valori.
+   * @throws NullPointerException se la diagonale è <code>null</code>
+   */
   public MatriceDiagonale(final int[] diagonale) {
     Objects.requireNonNull(diagonale);
     if (diagonale.length == 0)

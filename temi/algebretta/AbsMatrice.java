@@ -20,6 +20,10 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 
+/**
+ * Classe astratta che implementa parzialmente una matrice al solo scopo di provvedere il metodo
+ * {@link Object#toString()};
+ */
 public abstract class AbsMatrice implements Matrice {
   @Override
   public String toString() {
