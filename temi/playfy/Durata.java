@@ -45,14 +45,14 @@ public record Durata(int secondi) {
    * <samp>HH:MM:SS</samp> al valore numerico corrispondete.
    *
    * <p>Questo metodo può essere usato per convertire una delle parti ottenute dividendo la stringa
-   * <samp>HH:MM:SS</samp> ove occorre il carattere <samp>:</samp>, il parametro <code>bounded
-   * </code> consente di specificare se il massimo valore accettabile sia 60 (per le componenti
+   * <samp>HH:MM:SS</samp> ove occorre il carattere <samp>:</samp>, il parametro {@code bounded}
+   * consente di specificare se il massimo valore accettabile sia 60 (per le componenti
    * <samp>MM</samp> e <samp>SS</samp>) o non se c'è limite (per la componente <samp>HH</samp>).
    *
    * @param componente la componente dell'orario.
    * @param bounded se il il valore numerico della componente dev'essere minore di 60.
    * @return il valore numerico della componente.
-   * @throws NullPointerException se la componente è <code>null</code>.
+   * @throws NullPointerException se la componente è {@code null}.
    * @throws IllegalArgumentException se la componente è vuota, se non può essere converita in un
    *     intero, se il suo valore non è compreso tra 0 (compreso) e il bound specificato (escluso).
    */
@@ -80,7 +80,7 @@ public record Durata(int secondi) {
    *
    * @param durata la durata nel formato specificato.
    * @return una {@link Durata}.
-   * @throws NullPointerException se la durata è <code>null</code>.
+   * @throws NullPointerException se la durata è {@code null}.
    * @throws IllegalArgumentException se la stringa è nulla, o non è nel formato specificato.
    */
   static Durata valueOf(final String durata) {
@@ -105,7 +105,7 @@ public record Durata(int secondi) {
    *
    * @param altra la durata da sommare a questa.
    * @return la somma delle durate.
-   * @throws NullPointerException se la durata è <code>null</code>.
+   * @throws NullPointerException se la durata è {@code null}.
    */
   public Durata somma(final Durata altra) {
     return new Durata(
@@ -117,7 +117,7 @@ public record Durata(int secondi) {
    *
    * @param altra la durata da sottrarre da questa.
    * @return la differenza delle durate.
-   * @throws NullPointerException se la durata è <code>null</code>.
+   * @throws NullPointerException se la durata è {@code null}.
    * @throws IllegalArgumentException se l'altra durata è maggiore di questa.
    */
   public Durata sottrai(final Durata altra) {

@@ -54,7 +54,7 @@ public class Path implements Iterable<String> {
    *
    * @param isAbsolute indica se il path è assoluto.
    * @param parts elenco di stringhe che costiuiscono le parti del percorso.
-   * @throws NullPointerException se le <code>parts</code> è o contiene <code>null</code>.
+   * @throws NullPointerException se le {@code parts} è o contiene {@code null}.
    * @throws InvalidPathException se una della parti è vuota, o contiene il separatore.
    */
   private Path(final boolean isAbsolute, final List<String> parts) {
@@ -83,7 +83,7 @@ public class Path implements Iterable<String> {
    *
    * @param path la stringa che corrisponde alla rappresentazione testuale del path.
    * @return il path corrispondente alla stringa.
-   * @throws NullPointerException se path è <code>null</code>
+   * @throws NullPointerException se path è {@code null}
    * @throws InvalidPathException se nella stringa compaiono due separatori immediatamente
    *     consecutivi.
    */
@@ -99,7 +99,7 @@ public class Path implements Iterable<String> {
   /**
    * Consente di sapere se il <em>path</em> è <em>assoluto</em>.
    *
-   * @return <code>true</code> sse il path è assoluto.
+   * @return {@code true} sse il path è assoluto.
    */
   public boolean isAbsolute() {
     return isAbsolute;
@@ -119,7 +119,7 @@ public class Path implements Iterable<String> {
   /**
    * Restituisce l'ultima componente di questo <em>path</em>.
    *
-   * @return l'ultima componente di questo path, o <code>null</code> se il path è vuoto.
+   * @return l'ultima componente di questo path, o {@code null} se il path è vuoto.
    */
   public String name() {
     if (parts.isEmpty()) return null;

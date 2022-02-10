@@ -40,7 +40,7 @@ public abstract class AbstracListinoUnitario implements Listino {
    * Costruisce un listino data una mappa da giocattoli al loro prezzo unitario.
    *
    * @param prezzoUnitario mappa avente per chiav ii giocattoli e per valori i prezzi unitari.
-   * @throws NullPointerException se la mappa è, o contiene chiavi o valori <code>null</code>.
+   * @throws NullPointerException se la mappa è, o contiene chiavi o valori {@code null}.
    * @throws IllegalArgumentException se uno dei prezzi non è postivio.
    */
   public AbstracListinoUnitario(final Map<Giocattolo, Integer> prezzoUnitario) {
@@ -59,7 +59,7 @@ public abstract class AbstracListinoUnitario implements Listino {
    *
    * @param giocattolo il giocattolo.
    * @return il suo prezzo unitario.
-   * @throws NullPointerException se il giocattolo è <code>null</code>
+   * @throws NullPointerException se il giocattolo è {@code null}
    * @throws NoSuchElementException se il listino ignora il prezzo del giocattolo.
    */
   public int prezzoUnitario(final Giocattolo giocattolo) {
