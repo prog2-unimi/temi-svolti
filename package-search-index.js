@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.unimi.di.prog2.temisvolti.algebretta"},{"l":"it.unimi.di.prog2.temisvolti.bancarelle"},{"l":"it.unimi.di.prog2.temisvolti.boolvect"},{"l":"it.unimi.di.prog2.temisvolti.filesystem"},{"l":"it.unimi.di.prog2.temisvolti.piastrelle"},{"l":"it.unimi.di.prog2.temisvolti.playfy"}];updateSearchResults();
