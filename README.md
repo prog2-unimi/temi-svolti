@@ -18,7 +18,7 @@ annotati nel repository
 Gli studenti interessati sono caldamente consigliati di:
 
 - prendere dapprima visione dell'[accurata discussione](https://prog2unimi-temi-svolti.netlify.app/) degli svolgimenti,
-- quindi consultare i [sorgenti](https://github.com/prog2-unimi/temi-svolti/tree/master/temi) in questo repository.
+- quindi consultare i [sorgenti](https://github.com/prog2-unimi/temi-svolti/tree/master/temi) in questo repository e la relativa [documentazione Javadoc](https://prog2-unimi.github.io/temi-svolti/).
 
 L'obiettivo dev'essere dapprima riflettere sulle scelte implementative
 (presentate nella discussione), prima di procedere alla lettura delle soluzioni.
