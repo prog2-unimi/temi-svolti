@@ -51,7 +51,7 @@ public class Parser {
     Matcher m = OPERAZIONE.matcher(linea);
     if (m.matches())
       return new String[] {m.group("sinistra"), m.group("operatore"), m.group("destra")};
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("Errore nel formato.");
   }
 
   /**
@@ -79,7 +79,7 @@ public class Parser {
       final String tipo = m.group("tipo");
       return tipo.length() > 0 ? tipo.charAt(0) : ' ';
     }
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("Errore nel formato.");
   }
 
   /**
@@ -112,7 +112,7 @@ public class Parser {
                       .toArray())
           .toArray(n -> new int[n][]);
     }
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("Errore nel formato.");
   }
 
   /**
@@ -141,7 +141,7 @@ public class Parser {
           .map(c -> c.group(1))
           .mapToInt(Integer::parseInt)
           .toArray();
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("Errore nel formato.");
   }
 
   /**
@@ -164,6 +164,6 @@ public class Parser {
   public static int valoreScalare(final String operando) {
     Matcher m = SCALARE.matcher(operando);
     if (m.matches()) return Integer.parseInt(m.group("alpha"));
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("Errore nel formato.");
   }
 }

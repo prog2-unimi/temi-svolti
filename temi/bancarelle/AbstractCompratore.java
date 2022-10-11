@@ -45,7 +45,7 @@ public abstract class AbstractCompratore {
    * @throws IllegalArgumentException se l'insieme di bancarelle è vuoto.
    */
   public AbstractCompratore(final Set<Bancarella> bancarelle) {
-    Objects.requireNonNull(bancarelle);
+    Objects.requireNonNull(bancarelle, "L'insime di bancarelle non può essere null.");
     if (bancarelle.isEmpty())
       throw new IllegalArgumentException("Il mercatino deve contenere almeno una bancarella");
     this.bancarelle = Set.copyOf(bancarelle);

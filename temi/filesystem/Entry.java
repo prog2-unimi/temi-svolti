@@ -22,9 +22,7 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 import java.util.Objects;
 
-/**
- * Una classe astratta che rappresenta una <em>entry<em> del filesystem con assegnato <em>nome</em>.
- */
+/** Classe astratta che rappresenta una <em>entry<em> del filesystem con assegnato <em>nome</em>. */
 public abstract class Entry {
 
   /** Il nome dell'entry */
@@ -41,7 +39,7 @@ public abstract class Entry {
    */
   // il costruttore è protetto perché sarà usato solo dalle sottoclassi
   protected Entry(final String name) {
-    if (Objects.requireNonNull(name).isEmpty())
+    if (Objects.requireNonNull(name, "Il nome non può essere null.").isEmpty())
       throw new IllegalArgumentException("Il nome non può essere vuoto.");
     this.name = name;
   }

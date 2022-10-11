@@ -20,10 +20,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 /**
- * Una <em>piastrella romboidale</em> immutabile, la cui rappresentazione è costituita dalla
- * lunghezza (sempre positiva) delle sue diagonali <em>minore</em> e <em>maggiore</em> (memorizzate
- * in due attributi intero, non modificabili e pubblici, fatto che rende non necessari i
- * <em>getter</em>).
+ * Classe immutabile che rappresenta una <em>piastrella romboidale</em>, lo stato è costituito dalla
+ * lunghezza (sempre positiva) delle sue diagonali <em>minore</em> e <em>maggiore</em>.
  */
 public class PiastrellaRomboidale extends Piastrella {
 

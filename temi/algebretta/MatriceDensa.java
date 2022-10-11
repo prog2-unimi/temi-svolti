@@ -28,9 +28,9 @@ public class MatriceDensa extends AbsMatrice {
   /** I valori della matrice. */
   private final int[][] mat;
 
-  // AF: gli elementi dell'array corrispondono a quelli dela matrice RI: mat è
-  // non nullo ed ogni riga ha la stessa dimensione del numero di righe che è
-  // positivo
+  // AF: gli elementi dell'array corrispondono a quelli dela matrice
+  // RI: mat è non nullo ed ogni riga ha la stessa dimensione del numero di righe che è
+  //     positivo
 
   /**
    * Costruttore che costruisce una matrice di dimensione data, con tutti i valori pari a 0.
@@ -39,7 +39,7 @@ public class MatriceDensa extends AbsMatrice {
    * @throws IllegalArgumentException se la dimensione non è positiva.
    */
   private MatriceDensa(final int dim) {
-    if (dim < 0) throw new IllegalArgumentException("La dimensione deve essere positiva.");
+    if (dim <= 0) throw new IllegalArgumentException("La dimensione deve essere positiva.");
     mat = new int[dim][dim];
   }
 
@@ -51,7 +51,7 @@ public class MatriceDensa extends AbsMatrice {
    *     di elementi divrso da quello delle altre righe, o il numero di righe è zero.
    */
   public MatriceDensa(final int[][] mat) {
-    Objects.requireNonNull(mat);
+    Objects.requireNonNull(mat, "La matrice non può essere null.");
     if (mat.length == 0) throw new IllegalArgumentException("La dimensione deve essere positiva.");
     final int dim = mat.length;
     this.mat = new int[dim][dim];
@@ -68,7 +68,7 @@ public class MatriceDensa extends AbsMatrice {
    * @throws IllegalArgumentException se la matrice è {@code null}.
    */
   public MatriceDensa(final Matrice A) {
-    this(Objects.requireNonNull(A).dim());
+    this(Objects.requireNonNull(A, "La matrice non può essere null.").dim());
     for (int i = 0; i < dim(); i++) for (int j = 0; j < dim(); j++) mat[i][j] = A.val(i, j);
   }
 
@@ -93,7 +93,7 @@ public class MatriceDensa extends AbsMatrice {
 
   @Override
   public MatriceDensa più(final Matrice B) {
-    Objects.requireNonNull(B);
+    Objects.requireNonNull(B, "La matrice non può essere null.");
     if (!conforme(B)) throw new IllegalArgumentException("Le matrici non sono conformi.");
     if (B instanceof MatriceNulla) return this;
     final MatriceDensa C = new MatriceDensa(dim());
@@ -104,7 +104,7 @@ public class MatriceDensa extends AbsMatrice {
 
   @Override
   public Matrice per(final Matrice B) {
-    Objects.requireNonNull(B);
+    Objects.requireNonNull(B, "La matrice non può essere null.");
     if (!conforme(B)) throw new IllegalArgumentException("Le matrici non sono conformi.");
     if (B instanceof MatriceNulla) return B;
     if (B instanceof MatriceIdentità) return this;
@@ -117,7 +117,7 @@ public class MatriceDensa extends AbsMatrice {
 
   @Override
   public Vettore per(final Vettore v) {
-    Objects.requireNonNull(v);
+    Objects.requireNonNull(v, "Il vettore non può essere null.");
     if (!conforme(v))
       throw new IllegalArgumentException("Il vettore e la matrice non sono conformi.");
     if (v instanceof VettoreNullo) return v;

@@ -40,9 +40,10 @@ public class Giocattolo {
    * @throws IllegalArgumentException se nome o materiale sono stringhe vuote.
    */
   public Giocattolo(final String nome, final String materiale) {
-    this.nome = Objects.requireNonNull(nome);
-    this.materiale = Objects.requireNonNull(materiale);
-    if (nome.isEmpty() || materiale.isEmpty()) throw new IllegalArgumentException();
+    this.nome = Objects.requireNonNull(nome, "Il nome non può essere null.");
+    this.materiale = Objects.requireNonNull(materiale, "Il materiale non può essere null");
+    if (nome.isEmpty() || materiale.isEmpty())
+      throw new IllegalArgumentException("Nome e materiale non devono essere vuoti.");
   }
 
   @Override

@@ -56,7 +56,7 @@ public class Soluzione {
               rivestimento.add(p);
               break;
             default:
-              throw new IllegalArgumentException();
+              throw new IllegalArgumentException("Errore nel formato.");
           }
         }
       for (final Pavimentazione p : pavimentazione)

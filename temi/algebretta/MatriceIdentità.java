@@ -38,7 +38,7 @@ public class MatriceIdentità extends AbsMatrice {
    * @throws IllegalArgumentException se la dimensione non è positiva.
    */
   public MatriceIdentità(final int dim) {
-    if (dim < 0) throw new IllegalArgumentException("La dimensoine dev'essere positiva.");
+    if (dim <= 0) throw new IllegalArgumentException("La dimensoine dev'essere positiva.");
     this.dim = dim;
   }
 
@@ -63,7 +63,7 @@ public class MatriceIdentità extends AbsMatrice {
 
   @Override
   public Matrice più(final Matrice B) {
-    Objects.requireNonNull(B);
+    Objects.requireNonNull(B, "La matrice non può essere null.");
     if (!conforme(B)) throw new IllegalArgumentException("Le matrici non sono conformi.");
     if (B instanceof MatriceNulla) return this;
     return new MatriceDensa(this).più(B);
@@ -71,14 +71,14 @@ public class MatriceIdentità extends AbsMatrice {
 
   @Override
   public Matrice per(final Matrice B) {
-    Objects.requireNonNull(B);
+    Objects.requireNonNull(B, "La matrice non può essere null.");
     if (!conforme(B)) throw new IllegalArgumentException("Le matrici non sono conformi.");
     return B;
   }
 
   @Override
   public Vettore per(final Vettore v) {
-    Objects.requireNonNull(v);
+    Objects.requireNonNull(v, "Il vettore non può essere null.");
     if (!conforme(v))
       throw new IllegalArgumentException("Il vettore e la matrice non sono conformi.");
     return v;

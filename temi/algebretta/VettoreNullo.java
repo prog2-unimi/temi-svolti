@@ -23,6 +23,7 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 import java.util.Collections;
 import java.util.Objects;
 
+/** Classe che implementa il vettore null (anche detto zero). */
 public class VettoreNullo implements Vettore {
 
   private final int dim;
@@ -51,8 +52,8 @@ public class VettoreNullo implements Vettore {
 
   @Override
   public Vettore più(Vettore v) {
-    Objects.requireNonNull(v);
-    if (!conforme(v)) throw new IllegalArgumentException();
+    Objects.requireNonNull(v, "Il vettore non può essere null.");
+    if (!conforme(v)) throw new IllegalArgumentException("Il vettore non è conforme a questo.");
     return v;
   }
 
