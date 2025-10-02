@@ -69,7 +69,7 @@ public class MatriceDensa extends AbsMatrice {
    */
   public MatriceDensa(final Matrice A) {
     this(Objects.requireNonNull(A, "La matrice non può essere null.").dim());
-    for (int i = 0; i < dim(); i++) for (int j = 0; j < dim(); j++) mat[i][j] = A.val(i, j);
+    for (int i = 0; i < A.dim(); i++) for (int j = 0; j < A.dim(); j++) mat[i][j] = A.val(i, j);
   }
 
   @Override

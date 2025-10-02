@@ -1,6 +1,6 @@
 /*
 
-Copyright 2022 Massimo Santini
+Copyright 2025 Massimo Santini
 
 This file is part of "Programmazione 2 @ UniMI" teaching material.
 
@@ -63,6 +63,7 @@ public class Album implements Iterable<Album.Brano> {
       this.durata = durata;
     }
 
+
     /**
      * Restituisce un riferimento all'album a cui il brano appartiene.
      *
@@ -71,6 +72,7 @@ public class Album implements Iterable<Album.Brano> {
     public Album album() {
       return Album.this;
     }
+
 
     /**
      * Consente di determinare se questo brano appartiene al medesimo album di quello dato.
@@ -83,6 +85,7 @@ public class Album implements Iterable<Album.Brano> {
       return Album.this.equals(Objects.requireNonNull(album, "L'album non può essere null."));
     }
 
+
     /**
      * Restituisce una rappresentazione di questo brano come stringa.
      *
@@ -93,6 +96,7 @@ public class Album implements Iterable<Album.Brano> {
       return String.format(
           "\"%s\" (%s)%s", titolo, durata, conAlbum ? ", (da \"" + album().titolo + "\")" : "");
     }
+
 
     @Override
     public String toString() {
@@ -123,7 +127,7 @@ public class Album implements Iterable<Album.Brano> {
    * @param titolo titolo dell'album.
    * @param titoli lista dei titoli.
    * @param durate lista delle durate.
-   * @throws NullPointerException se uno dei parametri è {@code null}, o una delle liste contine un
+   * @throws NullPointerException se uno dei parametri è {@code null}, o una delle liste contiene un
    *     {@code null}.
    * @throws IllegalArgumentException se il titolo dell'album è vuoto, il numero di titoli è diverso
    *     da quello delle durate, il numero di titoli e durate è 0, uno dei titoli è vuoto, una delle
@@ -153,6 +157,7 @@ public class Album implements Iterable<Album.Brano> {
     this.durata = durata;
   }
 
+
   /**
    * Restituisce il numero di brani dell'album.
    *
@@ -161,6 +166,7 @@ public class Album implements Iterable<Album.Brano> {
   public int numeroBrani() {
     return brani.length;
   }
+
 
   /**
    * Restituisce il brano che ha nell'album la posizione data.
@@ -191,6 +197,7 @@ public class Album implements Iterable<Album.Brano> {
     return 1 + Arrays.asList(brani).indexOf(brano);
   }
 
+
   /**
    * Restituisce il primo brano con un dato titolo.
    *
@@ -216,6 +223,7 @@ public class Album implements Iterable<Album.Brano> {
     for (final Brano b : brani) if (b.titolo.equals(titolo)) return b;
     return null;
   }
+
 
   @Override
   public String toString() {

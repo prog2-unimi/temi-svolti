@@ -1,6 +1,6 @@
 /*
 
-Copyright 2022 Massimo Santini
+Copyright 2025 Massimo Santini
 
 This file is part of "Programmazione 2 @ UniMI" teaching material.
 
@@ -33,7 +33,7 @@ public record Durata(int secondi) {
   /**
    * Costruisce una durata.
    *
-   * @param secondi la durata espressa in secondin.
+   * @param secondi la durata espressa in secondi.
    * @throws IllegalArgumentException se la durata è negativa.
    */
   public Durata {
@@ -53,7 +53,7 @@ public record Durata(int secondi) {
    * @param bounded se il il valore numerico della componente dev'essere minore di 60.
    * @return il valore numerico della componente.
    * @throws NullPointerException se la componente è {@code null}.
-   * @throws IllegalArgumentException se la componente è vuota, se non può essere converita in un
+   * @throws IllegalArgumentException se la componente è vuota, se non può essere convertita in un
    *     intero, se il suo valore non è compreso tra 0 (compreso) e il bound specificato (escluso).
    */
   private static int toHMS(final String componente, final boolean bounded) {
@@ -73,6 +73,7 @@ public record Durata(int secondi) {
           "Il valore della componente \"" + componente + "\" deve essere minore di 60.");
     return hms;
   }
+
 
   /**
    * Fabbrica una durata data una stringa del formato <samp>HH:MM:SS</samp>, <samp>MM:SS</samp> o
@@ -96,9 +97,10 @@ public record Durata(int secondi) {
       int secondi = toHMS(parti[numParti - 1], true);
       return new Durata(3600 * ore + 60 * minuti + secondi);
     } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("Formato della durata invalito. " + e.getMessage());
+      throw new IllegalArgumentException("Formato della durata invalido. " + e.getMessage());
     }
   }
+
 
   /**
    * Restituisce una nuova durata pari alla somma di questa durata con l'argomento.
@@ -112,6 +114,7 @@ public record Durata(int secondi) {
         this.secondi + Objects.requireNonNull(altra, "La durata non può essere null.").secondi);
   }
 
+
   /**
    * Restituisce una nuova durata pari alla differenza tra questa durata con l'argomento.
    *
@@ -124,6 +127,7 @@ public record Durata(int secondi) {
     return new Durata(
         this.secondi - Objects.requireNonNull(altra, "La durata non può essere null.").secondi);
   }
+
 
   @Override
   public String toString() {

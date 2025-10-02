@@ -1,3 +1,25 @@
+/*
+
+Copyright 2025 Massimo Santini
+
+This file is part of "Programmazione 2 @ UniMI" teaching material.
+
+This is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This material is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this file.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,13 +33,12 @@ public class Soluzione {
       String line = null;
       while (s.hasNextLine()) {
         line = s.nextLine();
-        if (line.charAt(0) == 'A' || line.charAt(0) == 'C' || line.charAt(0) == 'P')
-          break;
+        if (line.charAt(0) == 'A' || line.charAt(0) == 'C' || line.charAt(0) == 'P') break;
         versamenti.add(Importo.valueOf(line));
       }
       CambiaValute cv = new CambiaValute(versamenti);
       String parts[] = null;
-      for (;;) {
+      for (; ; ) {
         if (line.length() == 0) return;
         if (line.length() > 2) {
           parts = line.substring(2).split("=");

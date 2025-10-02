@@ -1,20 +1,46 @@
+/*
+
+Copyright 2025 Massimo Santini
+
+This file is part of "Programmazione 2 @ UniMI" teaching material.
+
+This is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This material is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this file.  If not, see <https://www.gnu.org/licenses/>.
+
+*/
+
+
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
-/** Classe che implementa una cassa multi-valuta.
+/**
+ * Classe che implementa una cassa multi-valuta.
  *
- * La cassa consente di iterare sui propri importi diversi da zero.
+ * <p>La cassa consente di iterare sui propri importi diversi da zero.
  */
 public class Cassa implements Iterable<Importo> {
-  
-  /** Mappa che associa a ciascuna valuta il suo importo in cassa, valute e
-   * importi non devono essere <code>null</code>, gli importi devono essere
-   * positivi e avere valuta corrispondente alla chiave. */
+
+  /**
+   * Mappa che associa a ciascuna valuta il suo importo in cassa, valute e importi non devono essere
+   * <code>null</code>, gli importi devono essere positivi e avere valuta corrispondente alla
+   * chiave.
+   */
   private final Map<Valuta, Importo> valuta2importo = new EnumMap<>(Valuta.class);
-  
+
+
   /**
    * Restituisce l'importo totale presente in cassa in una data valuta.
    *
@@ -23,52 +49,58 @@ public class Cassa implements Iterable<Importo> {
    * @throws NullPointerException se la valuta è <code>null</code>.
    */
   public Importo totale(Valuta valuta) {
-    Importo totale = valuta2importo.get(Objects.requireNonNull(valuta, "La valuta non può essere null."));
+    Importo totale =
+        valuta2importo.get(Objects.requireNonNull(valuta, "La valuta non può essere null."));
     return totale == null ? Importo.zero(valuta) : totale;
   }
 
+
   /**
    * Versa un importo in cassa.
-   * 
+   *
    * @param importo l'importo da versare.
    * @throws NullPointerException se l'importo è <code>null</code>.
    * @throws IllegalArgumentException se l'importo è negativo.
    */
   public void versa(Importo importo) {
     if (!Objects.requireNonNull(importo, "L'importo non può essere null.").isZero()) return;
-    if (!importo.isPositive()) throw new IllegalArgumentException("Non si possono depositare importi negativi.");
+    if (!importo.isPositive())
+      throw new IllegalArgumentException("Non si possono depositare importi negativi.");
     valuta2importo.put(importo.valuta, totale(importo.valuta).somma(importo));
   }
+
 
   /**
    * Preleva un importo dalla cassa.
    *
    * @param importo l'importo da prelevare.
    * @throws NullPointerException se l'importo è <code>null</code>.
-   * @throws IllegalArgumentException se l'importo è negativo, o superiore al
-   * totale in cassa per la sua valuta.
+   * @throws IllegalArgumentException se l'importo è negativo, o superiore al totale in cassa per la
+   *     sua valuta.
    */
   public void preleva(Importo importo) {
     if (!Objects.requireNonNull(importo, "L'importo non può essere null.").isZero()) return;
-    if (!importo.isPositive()) throw new IllegalArgumentException("Non si possono depositare importi negativi.");
+    if (!importo.isPositive())
+      throw new IllegalArgumentException("Non si possono depositare importi negativi.");
     final Importo resto = totale(importo.valuta).differenza(importo);
     if (resto.isZero()) valuta2importo.remove(resto.valuta);
-    else if (!resto.isPositive()) throw new IllegalArgumentException("La cassa non contiene abbastanza fondi.");
+    else if (!resto.isPositive())
+      throw new IllegalArgumentException("La cassa non contiene abbastanza fondi.");
     else valuta2importo.put(importo.valuta, resto);
   }
+
 
   @Override
   public Iterator<Importo> iterator() {
     return Collections.unmodifiableCollection(valuta2importo.values()).iterator();
   }
-  
+
+
   @Override
   public String toString() {
     StringBuffer sb = new StringBuffer("Cassa:\n");
     Iterator<Importo> it = iterator();
-    while (it.hasNext())
-      sb.append(it.next() + (it.hasNext() ? "\n" : ""));      
+    while (it.hasNext()) sb.append(it.next() + (it.hasNext() ? "\n" : ""));
     return sb.toString();
   }
-
 }

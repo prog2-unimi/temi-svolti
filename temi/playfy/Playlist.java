@@ -1,6 +1,6 @@
 /*
 
-Copyright 2022 Massimo Santini
+Copyright 2025 Massimo Santini
 
 This file is part of "Programmazione 2 @ UniMI" teaching material.
 
@@ -41,6 +41,7 @@ public class Playlist implements Iterable<Album.Brano> {
   /** L'elenco di brani contenuti nella playlist. */
   private final List<Album.Brano> brani = new ArrayList<>();
 
+
   /**
    * Costruisce una playlist di nome dato.
    *
@@ -49,7 +50,9 @@ public class Playlist implements Iterable<Album.Brano> {
    * @throws IllegalArgumentException se il nome è vuoto.
    */
   public Playlist(final String nome) {
-    nome(nome);
+    if (Objects.requireNonNull(nome, "Il nome non può essere null.").isEmpty())
+      throw new IllegalArgumentException("Il nome non può essere null o vuoto.");
+    this.nome = nome;
   }
 
   /**
@@ -74,6 +77,7 @@ public class Playlist implements Iterable<Album.Brano> {
     this.nome = nome;
   }
 
+
   /**
    * Restituisce la durata complessiva della playlist.
    *
@@ -82,6 +86,7 @@ public class Playlist implements Iterable<Album.Brano> {
   public Durata durata() {
     return durata;
   }
+
 
   /**
    * Restituisce il numero di brani della playlist.
@@ -120,6 +125,7 @@ public class Playlist implements Iterable<Album.Brano> {
     return 1 + brani.indexOf(Objects.requireNonNull(brano, "Il brano non può essere null."));
   }
 
+
   /**
    * Aggiunge il brano dato alla playlist.
    *
@@ -141,6 +147,7 @@ public class Playlist implements Iterable<Album.Brano> {
     if (brani.remove(Objects.requireNonNull(brano, "Il brano non può essere null.")))
       durata = durata.sottrai(brano.durata);
   }
+
 
   /**
    * Fonde questa playlist con quella data.
@@ -165,12 +172,13 @@ public class Playlist implements Iterable<Album.Brano> {
     return fusa;
   }
 
+
   /**
    * Restituisce un iteratore che enumera tutti i brani della playlist che provengono dall'album
    * dato.
    *
    * @param album l'album.
-   * @return l'iteartore.
+   * @return l'iteratore.
    * @throws NullPointerException se l'album è {@code null}.
    */
   public Iterator<Album.Brano> brani(final Album album) {
@@ -183,6 +191,7 @@ public class Playlist implements Iterable<Album.Brano> {
       /** Il prossimo brano da restituire. */
       private Album.Brano next = null;
 
+
       @Override
       public boolean hasNext() {
         if (next != null) return true;
@@ -194,6 +203,7 @@ public class Playlist implements Iterable<Album.Brano> {
         return false;
       }
 
+
       @Override
       public Album.Brano next() {
         if (!hasNext()) throw new NoSuchElementException();
@@ -204,11 +214,12 @@ public class Playlist implements Iterable<Album.Brano> {
     };
   }
 
+
   /**
    * Restituisce un iteratore che enumera (senza ripetizioni) gli album di cui esiste un brano in
    * questa playlist.
    *
-   * @return l'itertore.
+   * @return l'iteratore.
    */
   public Iterator<Album> album() {
     return new Iterator<Album>() {
@@ -221,6 +232,7 @@ public class Playlist implements Iterable<Album.Brano> {
 
       /** L'insieme degli album restituiti da {@link #next()}. */
       private final Set<Album> restituiti = new HashSet<>();
+
 
       @Override
       public boolean hasNext() {
@@ -236,6 +248,7 @@ public class Playlist implements Iterable<Album.Brano> {
         return false;
       }
 
+
       @Override
       public Album next() {
         if (!hasNext()) throw new NoSuchElementException();
@@ -245,6 +258,7 @@ public class Playlist implements Iterable<Album.Brano> {
       }
     };
   }
+
 
   @Override
   public String toString() {
